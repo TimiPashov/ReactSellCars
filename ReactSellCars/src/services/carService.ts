@@ -1,9 +1,11 @@
 import { BASE_URL } from "../environments/environment";
+import { Car } from "../types/Car";
+
 
 export async function getAllCars() {
-    const response = await fetch(`${BASE_URL}/cars`);
-    const cars = await response.json();
-    return cars
+    console.log('fetching cars');
     
+  const response = await fetch(`${BASE_URL}/cars`);
+  const cars: Car[] = await response.json();
+  return cars;
 }
-

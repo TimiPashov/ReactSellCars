@@ -1,6 +1,6 @@
 import {  NavLink } from "react-router-dom";
 
-export function Nav() {
+export default function Nav() {
   return (
     <div>
       <ul>
