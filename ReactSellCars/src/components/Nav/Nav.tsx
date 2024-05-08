@@ -10,6 +10,9 @@ export default function Nav() {
         <li>
           <NavLink to="/cars">Catalog</NavLink>
         </li>
+        <li>
+          <NavLink to="/login">Login</NavLink>
+        </li>
       </ul>
     </div>
   );
