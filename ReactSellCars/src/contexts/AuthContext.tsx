@@ -1,4 +1,5 @@
 import { createContext, useState, ReactNode, useContext } from "react";
+import { login } from "../services/userService";
 
 export const AuthContext = createContext({});
 
@@ -13,6 +14,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   ): Promise<void> {
     e.preventDefault();
     console.log(data);
+    await login(data.email, data.password);
     setEmail("");
     setPassword("");
   }

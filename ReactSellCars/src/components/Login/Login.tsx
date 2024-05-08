@@ -3,7 +3,7 @@ import { useAuthContext } from "../../contexts/AuthContext";
 import { LoginSubmit } from "../../types/Auth";
 
 export default function Login() {
-  const [email, setEmail] = useState("");
+  const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const { onLoginSubmit } = useAuthContext() as LoginSubmit;
   return (
@@ -11,17 +11,22 @@ export default function Login() {
       <h1>Login</h1>
       <form
         onSubmit={(e) => {
-          onLoginSubmit(e, { email, password }, setEmail, setPassword);
+          onLoginSubmit(
+            e,
+            { email: userName, password },
+            setUserName,
+            setPassword
+          );
         }}
       >
-        <label htmlFor="email">Email</label>
+        <label htmlFor="username">Email</label>
         <input
           type="text"
-          id="email"
-          name="email"
+          id="username"
+          name="username "
           className="border"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          value={userName}
+          onChange={(e) => setUserName(e.target.value)}
         />
         <label htmlFor="password">Password</label>
         <input
