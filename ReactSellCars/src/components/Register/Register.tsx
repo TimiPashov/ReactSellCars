@@ -20,7 +20,7 @@ export default function Register() {
           name="username"
           value={userName}
           onChange={(e) => setUserName(e.target.value)}
-          className="border"
+          className="form-input"
         />
         <label htmlFor="email">Email</label>
         <input
@@ -29,7 +29,7 @@ export default function Register() {
           name="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="border"
+          className="form-input"
         />
         <label htmlFor="password">Password</label>
         <input
@@ -38,7 +38,7 @@ export default function Register() {
           name="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="border"
+          className="form-input"
         />
         <label htmlFor="re-password">Re-Password</label>
         <input
@@ -47,7 +47,7 @@ export default function Register() {
           name="re-password"
           value={rePassword}
           onChange={(e) => setRePassword(e.target.value)}
-          className="border"
+          className="form-input"
         />
         <button
           type="submit"
@@ -60,6 +60,7 @@ export default function Register() {
               setRePassword
             );
           }}
+          className="form-button"
         >
           Register
         </button>

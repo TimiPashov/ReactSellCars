@@ -12,7 +12,7 @@ import Register from "./components/Register/Register";
 
 function App() {
   return (
-    <div className="p-16 h-screen">
+    <div className="p-16 h-screen font-fira-code">
       <AuthProvider>
         <CarProvider>
           <Nav />

@@ -25,7 +25,7 @@ export default function Login() {
           type="text"
           id="username"
           name="username "
-          className="border"
+          className="form-input"
           value={userName}
           onChange={(e) => setUserName(e.target.value)}
         />
@@ -36,9 +36,9 @@ export default function Login() {
           name="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="border"
+          className="form-input"
         />
-        <button type="submit">Login</button>
+        <button type="submit" className="form-button">Login</button>
       </form>
     </div>
   );
