@@ -7,7 +7,7 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const { onLoginSubmit } = useAuthContext() as LoginSubmit;
   return (
-    <div>
+    <div className="mt-28 flex flex-col items-center h-auto ">
       <h1>Login</h1>
       <form
         onSubmit={(e) => {
@@ -18,6 +18,7 @@ export default function Login() {
             setPassword
           );
         }}
+        className="mt-4 flex flex-col gap-4 w-1/4"
       >
         <label htmlFor="username">Username</label>
         <input

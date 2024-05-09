@@ -10,9 +10,9 @@ export default function Register() {
   const { onRegisterSubmit } = useAuthContext() as RegisterSubmit;
 
   return (
-    <div>
+    <div className="mt-28 flex flex-col items-center h-auto">
       <h1>Register</h1>
-      <form>
+      <form  className="mt-4 flex flex-col gap-4 w-1/4">
         <label htmlFor="username">Username</label>
         <input
           type="text"

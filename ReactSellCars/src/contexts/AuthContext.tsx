@@ -7,6 +7,7 @@ export const AuthContext = createContext({});
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState({});
   const navigate = useNavigate();
+  
   async function onLoginSubmit(
     e: React.FormEvent<EventTarget>,
     data: { email: string; password: string },

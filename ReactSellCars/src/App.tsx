@@ -12,7 +12,7 @@ import Register from "./components/Register/Register";
 
 function App() {
   return (
-    <div className="p-28">
+    <div className="p-16 h-screen">
       <AuthProvider>
         <CarProvider>
           <Nav />
