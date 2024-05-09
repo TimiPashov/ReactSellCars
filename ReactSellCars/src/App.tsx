@@ -7,6 +7,7 @@ import Details from "./components/Details/Details";
 import { CarProvider } from "./contexts/CarContext";
 import Login from "./components/Login/Login";
 import { AuthProvider } from "./contexts/AuthContext";
+import Profile from "./components/Profile/Profile";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/cars" element={<Catalog />} />
             <Route path="/cars/:id" element={<Details />} />
+            <Route path="/profile" element={<Profile />} />
             <Route path="/login" element={<Login />} />
           </Routes>
         </CarProvider>

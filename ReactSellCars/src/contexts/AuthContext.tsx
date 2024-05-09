@@ -1,5 +1,5 @@
 import { createContext, useState, ReactNode, useContext } from "react";
-import { login } from "../services/userService";
+import { getProfile, login } from "../services/userService";
 
 export const AuthContext = createContext({});
 
@@ -13,11 +13,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setPassword: React.Dispatch<React.SetStateAction<string>>
   ): Promise<void> {
     e.preventDefault();
-    console.log(data);
     await login(data.email, data.password);
+    const user = await getProfile();
+    setUser(user);
     setEmail("");
     setPassword("");
   }
+
+  // useEffect(() => {
+  //   getProfile().then((data) => setUser(data));
+  // }, []);
 
   return (
     <AuthContext.Provider value={{ user, setUser, onLoginSubmit }}>
