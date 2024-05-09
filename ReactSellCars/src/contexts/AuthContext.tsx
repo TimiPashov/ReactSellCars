@@ -26,14 +26,19 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   async function onRegisterSubmit(
     e: React.FormEvent<EventTarget>,
-    data: { email: string; password: string; rePassword: string },
+    data: {
+      userName: string;
+      email: string;
+      password: string;
+      rePassword: string;
+    },
     setEmail: React.Dispatch<React.SetStateAction<string>>,
     setPassword: React.Dispatch<React.SetStateAction<string>>,
     setRePassword: React.Dispatch<React.SetStateAction<string>>
   ) {
     e.preventDefault();
     try {
-      await register(data.email, data.password, data.rePassword);
+      await register(data.userName, data.email, data.password, data.rePassword);
       const user = await getProfile();
       setUser(user);
       setEmail("");

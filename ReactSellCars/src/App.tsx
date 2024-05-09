@@ -8,6 +8,7 @@ import { CarProvider } from "./contexts/CarContext";
 import Login from "./components/Login/Login";
 import { AuthProvider } from "./contexts/AuthContext";
 import Profile from "./components/Profile/Profile";
+import Register from "./components/Register/Register";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             <Route path="/cars/:id" element={<Details />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
           </Routes>
         </CarProvider>
       </AuthProvider>

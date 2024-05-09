@@ -16,16 +16,16 @@ export async function login(username: string, password: string) {
 
 export async function register(
   username: string,
+  email: string,
   password: string,
   rePassword: string
 ) {
-  
   const response = await fetch(`${BASE_URL}/auth/register`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ username, password, rePassword }),
+    body: JSON.stringify({ username, email, password, rePassword }),
   });
 
   const data = await response.json();
