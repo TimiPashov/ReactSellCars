@@ -9,6 +9,7 @@ export default function Catalog() {
   const [loading, setLoading] = useState(true);
 
   const { cars } = useCarContext();
+ 
 
   // console.log('from catalog')
 

@@ -1,4 +1,10 @@
-import { createContext, useState, ReactNode, useContext } from "react";
+import {
+  createContext,
+  useState,
+  ReactNode,
+  useContext,
+  useEffect,
+} from "react";
 import { getProfile, login, logout, register } from "../services/userService";
 import { useNavigate } from "react-router-dom";
 
@@ -7,7 +13,19 @@ export const AuthContext = createContext({});
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState({});
   const navigate = useNavigate();
-  
+
+  useEffect(() => {
+    async function fetchUser() {
+      try {
+        const user = await getProfile();
+        setUser(user);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    fetchUser();
+  }, []);
+
   async function onLoginSubmit(
     e: React.FormEvent<EventTarget>,
     data: { email: string; password: string },
