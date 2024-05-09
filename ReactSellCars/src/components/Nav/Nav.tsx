@@ -1,6 +1,11 @@
-import {  NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import { useAuthContext } from "../../contexts/AuthContext";
 
 export default function Nav() {
+  const { onLogoutSubmit } = useAuthContext() as {
+    onLogoutSubmit: () => Promise<void>;
+  };
+
   return (
     <div>
       <ul>
@@ -15,6 +20,11 @@ export default function Nav() {
         </li>
         <li>
           <NavLink to="/login">Login</NavLink>
+        </li>
+        <li>
+          <NavLink to="#" onClick={onLogoutSubmit}>
+            Logout
+          </NavLink>
         </li>
       </ul>
     </div>

@@ -14,6 +14,17 @@ export async function login(username: string, password: string) {
   return data;
 }
 
+export async function logout() {
+  await fetch(`${BASE_URL}/auth/logout`, {
+    method: "GET",
+    headers: {
+      "content-type": "application/json",
+      Cookie: document.cookie,
+    },
+    credentials: "include",
+  });
+}
+
 export async function getProfile() {
   const response = await fetch(`${BASE_URL}/auth/profile`, {
     method: "GET",
