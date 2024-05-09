@@ -1,11 +1,12 @@
 import { createContext, useState, ReactNode, useContext } from "react";
 import { getProfile, login, logout, register } from "../services/userService";
+import { useNavigate } from "react-router-dom";
 
 export const AuthContext = createContext({});
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState({});
-
+  const navigate = useNavigate();
   async function onLoginSubmit(
     e: React.FormEvent<EventTarget>,
     data: { email: string; password: string },
@@ -19,6 +20,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setUser(user);
       setEmail("");
       setPassword("");
+      navigate("/");
     } catch (error) {
       console.log(error);
     }
@@ -44,6 +46,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setEmail("");
       setPassword("");
       setRePassword("");
+      navigate("/");
     } catch (error) {
       console.log(error);
     }
