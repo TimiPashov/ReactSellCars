@@ -12,12 +12,6 @@ import Register from "./components/Register/Register";
 import LoggedInGuard from "./components/guards/LoggedInGuard";
 
 function App() {
-
-
-
-
-
-  
   return (
     <div className="p-16 h-screen font-fira-code">
       <AuthProvider>
@@ -26,8 +20,8 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/cars" element={<Catalog />} />
+            <Route path="/cars/:id" element={<Details />} />
             <Route element={<LoggedInGuard />}>
-              <Route path="/cars/:id" element={<Details />} />
               <Route path="/profile" element={<Profile />} />
             </Route>
             <Route path="/login" element={<Login />} />
