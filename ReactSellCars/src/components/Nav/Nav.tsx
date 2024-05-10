@@ -17,10 +17,17 @@ export default function Nav() {
         <li>
           <NavLink to="/cars">Catalog</NavLink>
         </li>
-        <li>
-          <NavLink to="/profile">Profile</NavLink>
-        </li>
-        {!user.username && (
+        {user._id && (
+          <>
+            <li>
+              <NavLink to="/add-car">Add Car</NavLink>
+            </li>
+            <li>
+              <NavLink to="/profile">Profile</NavLink>
+            </li>
+          </>
+        )}
+        {!user._id && (
           <>
             <li>
               <NavLink to="/login">Login</NavLink>

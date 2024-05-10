@@ -5,18 +5,21 @@ import {
   useState,
   ReactNode,
 } from "react";
-import { getAllCars } from "../services/carService";
+import { createCar, getAllCars } from "../services/carService";
 import { Car } from "../types/Car";
+import { useNavigate } from "react-router-dom";
 
-interface CarContextProps {
-  cars: Car[];
-  setCars: React.Dispatch<React.SetStateAction<Car[]>>;
-}
+// interface CarContextProps {
+//   cars: Car[];
+//   setCars: React.Dispatch<React.SetStateAction<Car[]>>;
+//   onCreateCarSubmit: (e: React.FormEvent<EventTarget>, data: Car) => Promise<void>;
+// }
 
-const CarContext = createContext<CarContextProps | null>(null);
+const CarContext = createContext({});
 
 export function CarProvider({ children }: { children: ReactNode }) {
   const [cars, setCars] = useState<Car[]>([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (cars.length === 0) {
@@ -26,8 +29,18 @@ export function CarProvider({ children }: { children: ReactNode }) {
     }
   });
 
+  async function onCreateCarSubmit(
+    e: React.FormEvent<EventTarget>,
+    data: Car
+  ): Promise<void> {
+    e.preventDefault();
+    const car = await createCar(data);
+    setCars([...cars, car]);
+    navigate("/cars/" + car._id);
+  }
+
   return (
-    <CarContext.Provider value={{ cars, setCars }}>
+    <CarContext.Provider value={{ cars, setCars, onCreateCarSubmit }}>
       {children}
     </CarContext.Provider>
   );

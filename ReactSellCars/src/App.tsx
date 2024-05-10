@@ -10,6 +10,7 @@ import { AuthProvider } from "./contexts/AuthContext";
 import Profile from "./components/Profile/Profile";
 import Register from "./components/Register/Register";
 import LoggedInGuard from "./components/guards/LoggedInGuard";
+import AddCar from "./components/AddCar/AddCar";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
             <Route path="/cars" element={<Catalog />} />
             <Route path="/cars/:id" element={<Details />} />
             <Route element={<LoggedInGuard />}>
+              <Route path="/add-car" element={<AddCar />} />
               <Route path="/profile" element={<Profile />} />
             </Route>
             <Route path="/login" element={<Login />} />
