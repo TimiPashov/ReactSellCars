@@ -25,6 +25,11 @@ export default function Nav() {
             <li>
               <NavLink to="/profile">Profile</NavLink>
             </li>
+            <li>
+              <NavLink to="#" onClick={onLogoutSubmit}>
+                Logout
+              </NavLink>
+            </li>
           </>
         )}
         {!user._id && (
@@ -37,11 +42,6 @@ export default function Nav() {
             </li>
           </>
         )}
-        <li>
-          <NavLink to="#" onClick={onLogoutSubmit}>
-            Logout
-          </NavLink>
-        </li>
       </ul>
     </div>
   );
