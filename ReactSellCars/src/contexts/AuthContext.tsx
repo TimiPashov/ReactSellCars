@@ -7,6 +7,7 @@ import {
 } from "react";
 import { getProfile, login, logout, register } from "../services/userService";
 import { useNavigate } from "react-router-dom";
+import { setUserLocalStorage } from "../utils/utils";
 
 export const AuthContext = createContext({});
 
@@ -14,14 +15,20 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState({});
   const navigate = useNavigate();
 
-  useEffect(() => {
+  useEffect(() => {  
     async function fetchUser() {
-      try {
-        const user = await getProfile();
-        setUser(user);
-      } catch (error) {
-        console.error(error);
-      }
+      const storageUser = localStorage.getItem("user");
+    
+        if (storageUser != "undefined" && storageUser != null) {
+          // console.log(storageUser);
+          setUser(JSON.parse(storageUser));
+        } else {
+          const user = await getProfile();
+          if (user) {
+            setUserLocalStorage(user);
+            setUser(JSON.parse(localStorage.getItem("user") || "{}"));
+          }
+        }
     }
     fetchUser();
   }, []);
@@ -37,6 +44,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       await login(data.email, data.password);
       const user = await getProfile();
       setUser(user);
+      setUserLocalStorage(user);
       setEmail("");
       setPassword("");
       navigate("/");
@@ -62,6 +70,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       await register(data.userName, data.email, data.password, data.rePassword);
       const user = await getProfile();
       setUser(user);
+      setUserLocalStorage(user);
       setEmail("");
       setPassword("");
       setRePassword("");
@@ -73,8 +82,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   async function onLogoutSubmit(): Promise<void> {
     try {
+      localStorage.removeItem("user");
       setUser({});
       await logout();
+      navigate("/login")
     } catch (error) {
       console.error(error);
     }

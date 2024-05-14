@@ -1,11 +1,8 @@
-
 import { useAuthContext } from "../../contexts/AuthContext";
 import { User } from "../../types/Auth";
 
-
 export default function Profile() {
   const { user } = useAuthContext() as { user: User };
-
 
 
   return (
@@ -14,7 +11,7 @@ export default function Profile() {
       <div>
         <p>Username: {user.username}</p>
         <p>Email: {user.email}</p>
-        <p>Posted Cars Count: {user.cars.length}</p>
+        <p>Posted Cars Count: {user.cars?.length}</p>
       </div>
     </div>
   );

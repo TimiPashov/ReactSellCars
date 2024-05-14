@@ -18,7 +18,7 @@ export default function Home() {
         cars from our online shop. Additionally, you can sell your own car by
         listing it on our platform.
       </p>
-      {!user._id && (
+      {!user && (
         <div>
           <p className="text-lg text-center">
             Already have an account?{" "}

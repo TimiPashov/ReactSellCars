@@ -45,14 +45,23 @@ export async function logout() {
 }
 
 export async function getProfile() {
-  const response = await fetch(`${BASE_URL}/auth/profile`, {
-    method: "GET",
-    headers: {
-      "content-type": "application/json",
-      Cookie: document.cookie,
-    },
-    credentials: "include",
-  });
-  const data = await response.json();
-  return data;
+  const token = document.cookie.split("=")[1];
+
+  if (token !== undefined) {
+
+    const response = await fetch(`${BASE_URL}/auth/profile`, {
+      method: "GET",
+      headers: {
+        "content-type": "application/json",
+        Cookie: document.cookie,
+      },
+      credentials: "include",
+    });
+    if (response.status === 401) {
+      return undefined;
+    }
+    const data = await response.json();
+    
+    return data;
+  }
 }

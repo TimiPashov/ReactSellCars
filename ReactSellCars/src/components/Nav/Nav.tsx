@@ -7,6 +7,9 @@ export default function Nav() {
     onLogoutSubmit: () => Promise<void>;
   };
   const { user } = useAuthContext() as { user: User };
+ 
+
+  
 
   return (
     <div className="h-auto p-16">
