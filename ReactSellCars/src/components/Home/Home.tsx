@@ -5,7 +5,7 @@ export default function Home() {
   const { user } = useAuthContext() as { user: User };
   return (
     <div className="h-auto w-2/3 flex flex-col items-center self-center gap-4">
-      <h1 className="text-3xl font-bold">Welcome to SellCars Online Shop</h1>
+      <h1 className="text-3xl font-bold text-center">Welcome to SellCars Online Shop</h1>
       <p className="text-lg text-center">
         You can browse our catalog of cars, or add your own car for sale.
       </p>
@@ -18,7 +18,7 @@ export default function Home() {
         cars from our online shop. Additionally, you can sell your own car by
         listing it on our platform.
       </p>
-      {!user && (
+      {!user._id && (
         <div>
           <p className="text-lg text-center">
             Already have an account?{" "}
