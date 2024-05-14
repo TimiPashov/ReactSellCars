@@ -14,7 +14,7 @@ import AddCar from "./components/AddCar/AddCar";
 
 function App() {
   return (
-    <div className="p-16 h-screen font-fira-code">
+    <div className="p-16 h-screen font-fira-code flex flex-col">
       <AuthProvider>
         <CarProvider>
           <Nav />

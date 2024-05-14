@@ -9,7 +9,7 @@ export default function Nav() {
   const { user } = useAuthContext() as { user: User };
 
   return (
-    <div>
+    <div className="h-auto p-16">
       <ul className="flex gap-4 justify-center">
         <li>
           <NavLink to="/">Home</NavLink>
