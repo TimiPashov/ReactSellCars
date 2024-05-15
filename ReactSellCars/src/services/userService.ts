@@ -10,6 +10,9 @@ export async function login(username: string, password: string) {
   });
 
   const data = await response.json();
+  if (data.error) {
+    throw data;
+  }
   document.cookie = `token=${data.token}`;
   return data;
 }
@@ -48,7 +51,6 @@ export async function getProfile() {
   const token = document.cookie.split("=")[1];
 
   if (token !== undefined) {
-
     const response = await fetch(`${BASE_URL}/auth/profile`, {
       method: "GET",
       headers: {
@@ -61,7 +63,7 @@ export async function getProfile() {
       return undefined;
     }
     const data = await response.json();
-    
+
     return data;
   }
 }

@@ -15,20 +15,20 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState({});
   const navigate = useNavigate();
 
-  useEffect(() => {  
+  useEffect(() => {
     async function fetchUser() {
       const storageUser = localStorage.getItem("user");
-    
-        if (storageUser != "undefined" && storageUser != null) {
-          // console.log(storageUser);
-          setUser(JSON.parse(storageUser));
-        } else {
-          const user = await getProfile();
-          if (user) {
-            setUserLocalStorage(user);
-            setUser(JSON.parse(localStorage.getItem("user") || "{}"));
-          }
+
+      if (storageUser != "undefined" && storageUser != null) {
+        // console.log(storageUser);
+        setUser(JSON.parse(storageUser));
+      } else {
+        const user = await getProfile();
+        if (user) {
+          setUserLocalStorage(user);
+          setUser(JSON.parse(localStorage.getItem("user") || "{}"));
         }
+      }
     }
     fetchUser();
   }, []);
@@ -37,7 +37,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     e: React.FormEvent<EventTarget>,
     data: { email: string; password: string },
     setEmail: React.Dispatch<React.SetStateAction<string>>,
-    setPassword: React.Dispatch<React.SetStateAction<string>>
+    setPassword: React.Dispatch<React.SetStateAction<string>>,
+    setError: React.Dispatch<React.SetStateAction<{ error: string }>>
   ): Promise<void> {
     e.preventDefault();
     try {
@@ -49,7 +50,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setPassword("");
       navigate("/");
     } catch (error) {
-      console.log(error);
+      setError(error as { error: string });
     }
   }
 
@@ -85,7 +86,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       localStorage.removeItem("user");
       setUser({});
       await logout();
-      navigate("/login")
+      navigate("/login");
     } catch (error) {
       console.error(error);
     }
