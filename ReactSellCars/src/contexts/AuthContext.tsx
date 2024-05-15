@@ -64,7 +64,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     },
     setEmail: React.Dispatch<React.SetStateAction<string>>,
     setPassword: React.Dispatch<React.SetStateAction<string>>,
-    setRePassword: React.Dispatch<React.SetStateAction<string>>
+    setRePassword: React.Dispatch<React.SetStateAction<string>>,
+    setError: React.Dispatch<React.SetStateAction<{ error: string }>>
   ) {
     e.preventDefault();
     try {
@@ -77,7 +78,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setRePassword("");
       navigate("/");
     } catch (error) {
-      console.log(error);
+      setError(error as { error: string });
     }
   }
 

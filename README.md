@@ -15,6 +15,9 @@
 -message owner
 4. Forms
 -Forms validation
+.login(done)
+.register
+.create car
 -error handing
 5. Profile page
 -messages

@@ -32,6 +32,12 @@ export async function register(
   });
 
   const data = await response.json();
+  if (data.error) {
+    if(data.error.includes('User validation failed')){
+      data.error = 'Invalid email!';  
+    }
+    throw data;
+  }
   document.cookie = `token=${data.token}`;
   return data;
 }
