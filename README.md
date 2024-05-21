@@ -16,7 +16,7 @@
 4. Forms
 -Forms validation
 .login(done)
-.register
+.register(done)
 .create car
 -error handing
 5. Profile page

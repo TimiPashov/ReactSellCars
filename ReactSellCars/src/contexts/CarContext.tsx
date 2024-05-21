@@ -9,13 +9,8 @@ import { createCar, getAllCars } from "../services/carService";
 import { Car } from "../types/Car";
 import { useNavigate } from "react-router-dom";
 
-// interface CarContextProps {
-//   cars: Car[];
-//   setCars: React.Dispatch<React.SetStateAction<Car[]>>;
-//   onCreateCarSubmit: (e: React.FormEvent<EventTarget>, data: Car) => Promise<void>;
-// }
-
 const CarContext = createContext({});
+const URL_PATTERN = /^https?:\/\/.+$/i;
 
 export function CarProvider({ children }: { children: ReactNode }) {
   const [cars, setCars] = useState<Car[]>([]);
@@ -31,9 +26,32 @@ export function CarProvider({ children }: { children: ReactNode }) {
 
   async function onCreateCarSubmit(
     e: React.FormEvent<EventTarget>,
-    data: Car
+    data: Car,
+    setError: React.Dispatch<
+      React.SetStateAction<{ error: string; fields: string[] }>
+    >
   ): Promise<void> {
     e.preventDefault();
+    const fields: string[] = [];
+
+    for (const [key, value] of Object.entries(data)) {
+      if (!value) {
+        fields.push(key);
+      }
+    }
+    setError({ error: "All fields are required", fields });
+    if (fields.length > 0) {
+      return;
+    }
+
+    // if (Object.entries(data).some(([key, value]) => value === "")) {
+    //   setError({ error: "All fields are required" });
+    //   return;
+    // }
+    if (!URL_PATTERN.test(data.images)) {
+      setError({ error: "Invalid image URL", fields: [] });
+      return;
+    }
     const car = await createCar(data);
     setCars([...cars, car]);
     navigate("/cars/" + car._id);

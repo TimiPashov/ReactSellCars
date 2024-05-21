@@ -12,30 +12,44 @@ export default function AddCar() {
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
   const [images, setImages] = useState("");
+  const [error, setError] = useState<{ error: string; fields: string[] }>({
+    error: "",
+    fields: [],
+  });
 
   const { onCreateCarSubmit } = useCarContext() as {
     onCreateCarSubmit: (
       event: React.FormEvent<HTMLFormElement>,
-      data: CreateCar
+      data: CreateCar,
+      setError: React.Dispatch<
+        React.SetStateAction<{ error: string; fields: string[] }>
+      >
     ) => void;
   };
 
   return (
     <div className="mt-20 flex flex-col items-center h-auto ">
       <h1>Add Car</h1>
+      {error.error && error.error.toLowerCase().includes("all fields") && (
+        <p className="text-red-500 text-xs">{error.error}</p>
+      )}
       <form
         onSubmit={(e) => {
-          onCreateCarSubmit(e, {
-            make,
-            model,
-            year,
-            used,
-            coupe,
-            fuelType,
-            description,
-            price,
-            images,
-          });
+          onCreateCarSubmit(
+            e,
+            {
+              make,
+              model,
+              year,
+              used,
+              coupe,
+              fuelType,
+              description,
+              price,
+              images,
+            },
+            setError
+          );
         }}
         className="mt-4 w-1/3 flex flex-col gap-2 text-xs"
       >
@@ -46,7 +60,11 @@ export default function AddCar() {
           name="make"
           value={make}
           onChange={(e) => setMake(e.target.value)}
-          className="form-input"
+          className={`form-input ${
+            error.error && error.error.toLowerCase().includes("all fields")
+              ? "border-red-500"
+              : ""
+          }`}
         />
 
         <label htmlFor="model">Model:</label>
@@ -56,7 +74,11 @@ export default function AddCar() {
           name="model"
           value={model}
           onChange={(e) => setModel(e.target.value)}
-          className="form-input"
+          className={`form-input ${
+            error.error && error.error.toLowerCase().includes("all fields")
+              ? "border-red-500"
+              : ""
+          }`}
         />
 
         <label htmlFor="year">Year:</label>
@@ -66,7 +88,11 @@ export default function AddCar() {
           name="year"
           value={year}
           onChange={(e) => setYear(e.target.value)}
-          className="form-input"
+          className={`form-input ${
+            error.error && error.error.toLowerCase().includes("all fields")
+              ? "border-red-500"
+              : ""
+          }`}
         />
 
         <label htmlFor="used">Used:</label>
@@ -113,7 +139,11 @@ export default function AddCar() {
           name="description"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
-          className="form-input"
+          className={`form-input ${
+            error.error && error.error.toLowerCase().includes("all fields")
+              ? "border-red-500"
+              : ""
+          }`}
         ></textarea>
 
         <label htmlFor="price">Price:</label>
@@ -123,7 +153,11 @@ export default function AddCar() {
           name="price"
           value={price}
           onChange={(e) => setPrice(e.target.value)}
-          className="form-input"
+          className={`form-input ${
+            error.error && error.error.toLowerCase().includes("all fields")
+              ? "border-red-500"
+              : ""
+          }`}
         />
 
         <label htmlFor="images">Image:</label>
@@ -133,7 +167,11 @@ export default function AddCar() {
           name="images"
           value={images}
           onChange={(e) => setImages(e.target.value)}
-          className="form-input"
+          className={`form-input ${
+            error.error && error.error.toLowerCase().includes("all fields")
+              ? "border-red-500"
+              : ""
+          }`}
         />
         <button className="form-button">Submit</button>
       </form>
